@@ -60,11 +60,13 @@ class OrderImporter {
 
         $result = $this->picqerclient->addOrder($order);
         if (isset($result['data']['idorder'])) {
+            logThis('Order ' . $amazonorder['amazonOrderId'] . ' / ' . $result['data']['idorder'] . ' added to Picqer');
             if ($this->config['picqer-close-orders']) {
                 $this->picqerclient->closeOrder($result['data']['idorder']);
             }
             return $result['data']['orderid'];
         } else {
+            logThis('ERROR: Could not create order in Picqer');
             throw new \Exception('Could not create order in Picqer');
         }
     }
@@ -75,6 +77,7 @@ class OrderImporter {
         if (isset($productresult['data'])) {
             return $productresult['data']['idproduct'];
         } else {
+            logThis('Cannot find product ' . $productcode);
             return false;
         }
     }

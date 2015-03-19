@@ -20,7 +20,7 @@ include 'config.php';
 
 foreach ($config['amazon-stores'] as $storeId => $amazonStoreData) {
     $store['AmazonStore' . $storeId]['merchantId'] = $amazonStoreData['amazon-merchant-id'];
-    $store['AmazonStore' . $storeId]['marketplaceId'] = $amazonStoreData['amazon-marketplace-id'][0];
+    $store['AmazonStore' . $storeId]['marketplaceId'] = $amazonStoreData['amazon-marketplace-id'];
     $store['AmazonStore' . $storeId]['keyId'] = $amazonStoreData['amazon-access-key-id'];
     $store['AmazonStore' . $storeId]['secretKey'] = $amazonStoreData['amazon-secret-access-key'];
 }

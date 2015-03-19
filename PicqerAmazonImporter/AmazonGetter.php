@@ -27,7 +27,9 @@ class AmazonGetter {
 
             /* @var \AmazonOrder $amazonorder */
             foreach ($amazonorders as $amazonorder) {
+                logThis('Found ' . $amazonorder->getAmazonOrderId());
                 if (!in_array($amazonorder->getAmazonOrderId(), $this->data['processedOrders'])) {
+                    logThis('Trying to import');
                     $order = array();
                     $order['amazonOrderId'] = $amazonorder->getAmazonOrderId();
                     $order['purchaseDate'] = $amazonorder->getPurchaseDate();
@@ -44,11 +46,13 @@ class AmazonGetter {
                             'productcode' => $item['SellerSKU'],
                             'name'        => $item['Title'],
                             'amount'      => $item['QuantityOrdered'],
-                            'price'       => $item['ItemPrice']['Amount']
+                            'price'       => $item['ItemPrice']['Amount'] / $item['QuantityOrdered'] // Because ItemPrice is total for the whole line
                         );
                     }
 
                     $orders[] = $order;
+                } else {
+                    logThis('Order ' . $amazonorder->getAmazonOrderId() . ' already imported');
                 }
             }
         }
