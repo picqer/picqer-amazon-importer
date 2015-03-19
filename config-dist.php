@@ -6,6 +6,7 @@ $config = array(
 
     'picqer-close-orders' => true, // do we need to close the order after import?
     'picqer-idcustomer' => 1, // id of the customer you want all the orders to be added to
+    'picqer-idtag' => null, // id of the tag new orders needs to get
 
     'amazon-service-url' => 'https://mws-eu.amazonservices.com/', // Main Amazon endpoint
 );

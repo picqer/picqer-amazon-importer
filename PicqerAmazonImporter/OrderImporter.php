@@ -61,9 +61,15 @@ class OrderImporter {
         $result = $this->picqerclient->addOrder($order);
         if (isset($result['data']['idorder'])) {
             logThis('Order ' . $amazonorder['amazonOrderId'] . ' / ' . $result['data']['idorder'] . ' added to Picqer');
+
+            if (isset($this->config['picqer-idtag']) && ! empty($this->config['picqer-idtag'])) {
+                $this->picqerclient->addOrderTag($result['data']['idorder'], $this->config['picqer-idtag']);
+            }
+
             if ($this->config['picqer-close-orders']) {
                 $this->picqerclient->closeOrder($result['data']['idorder']);
             }
+
             return $result['data']['orderid'];
         } else {
             logThis('ERROR: Could not create order in Picqer');

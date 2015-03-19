@@ -9,7 +9,7 @@
     ],
     "require": {
         "cpigroup/php-amazon-mws": "1.1.0",
-        "picqer/api-client": "dev-master",
+        "picqer/api-client": "~0.9.9",
         "league/flysystem": "0.4.*"
     },
     "autoload": {
